@@ -1,4 +1,4 @@
-const { check, validationResult } = require('express-validator');
+const { body, check, validationResult } = require('express-validator');
 
 exports.validateMismate = [
   check('scan')
@@ -19,17 +19,18 @@ exports.validateMismate = [
     .isIn(['right', 'left'])
     .withMessage('Invalid side')
     .bail(),
-  check('has-box')
+  check('hasBox')
     .trim()
     .escape()
     .isIn('on', '')
     .withMessage('Please indicate if item has a box')
-    .bail()
+    .bail(),
+  body('hasBox')
     .toBoolean(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json({errors: errors.array()});
+      return res.status(400).json({ errors: errors.array() });
     }
     next();
   }

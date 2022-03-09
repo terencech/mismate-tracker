@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 require('dotenv').config();
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGO_URI).catch(err => console.log(err));
 
 const mismateRoutes = require(__dirname + '/routes/mismates.js');
 
