@@ -11,3 +11,12 @@ exports.createMismate = async (req, res) => {
     res.json(mismate);
   });
 }
+
+exports.readMismates = async (req, res) => {
+  MismateModel.find({
+    locationId: null
+  }, (err, mismates) => {
+    if (err) res.json(err);
+    res.json(mismates);
+  })
+}
