@@ -27,3 +27,23 @@ exports.createUser = async (req, res) => {
     res.json(user);
   });
 }
+
+exports.userLogin = async (req, res) => {
+  const { name, password } = req.body;
+
+  UserModel.findOne({
+    name
+  }, (err, user) => {
+    if (err) console.error(err);
+    if (user && bcrypt.compareSync(password, user.password)) {
+      const token = jwt.sign(
+        { user_id: user._id },
+        process.env.TOKEN_KEY,
+        { expiresIn: '8h' }
+      );
+      user.token = token;
+
+      res.json(user);
+    }
+  })
+}
