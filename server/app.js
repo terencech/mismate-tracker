@@ -2,18 +2,21 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
+const userRoutes = require('./routes/users.js');
+const mismateRoutes = require('./routes/mismates.js');
 
 app.set('view engine', 'ejs');
 
 mongoose.connect(process.env.MONGO_URI).catch(err => console.log(err));
 
-const mismateRoutes = require(__dirname + '/routes/mismates.js');
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
 mismateRoutes(app);
+userRoutes(app);
 
 const listener = app.listen(process.env.PORT || 8000, () => {
   console.log('App is now listening on port ' + listener.address().port);

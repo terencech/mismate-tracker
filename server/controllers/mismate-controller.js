@@ -1,11 +1,13 @@
 const MismateModel = require('../models/mismate.js');
 
 exports.createMismate = async (req, res) => {
+  const { scan, side, hasBox } = req.body;
+
   MismateModel.create({
-    locationId: null,
-    sku: req.body.scan,
-    side: req.body.side,
-    hasBox: req.body.hasBox
+    userId: null,
+    sku: scan,
+    side,
+    hasBox
   }, (err, mismate) => {
     if (err) res.json(err);
     res.json(mismate);

@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const mismateSchema = new Schema({
-  storeId: { type: Schema.Types.ObjectId, ref: 'Store' },
-  sku: { type: Number },
-  side: { type: String, enum: ['right', 'left'] },
-  hasBox: { type: Boolean }
+  userId: { type: Schema.Types.ObjectId, ref: 'User' },
+  sku: { type: Number, required: true },
+  side: { type: String, enum: ['right', 'left'], required: true },
+  hasBox: { type: Boolean, required: true }
 });
 
 module.exports = mongoose.model('Mismate', mismateSchema);
