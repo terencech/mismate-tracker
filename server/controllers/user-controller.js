@@ -43,6 +43,8 @@ exports.userLogin = async (req, res) => {
       );
       user.token = token;
 
+      console.log(user.token);
+
       res.json(user);
     }
   })

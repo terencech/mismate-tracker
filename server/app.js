@@ -4,6 +4,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/users.js');
 const mismateRoutes = require('./routes/mismates.js');
+const auth = require('./middleware/auth.js');
 
 app.set('view engine', 'ejs');
 
@@ -13,6 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + '/views/index.html');
+});
+
+app.get('/auth', auth, (req, res) => {
+  res.status(200).send('Auth success');
 });
 
 mismateRoutes(app);
