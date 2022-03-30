@@ -1,4 +1,4 @@
-const { validateMismate } = require('../validation/mismate-validation.js');
+const { validateMismate } = require('../middleware/validation/mismate-validation.js');
 const { createMismate, readMismates } = require('../controllers/mismate-controller.js');
 
 function mismateRoutes(app) {
