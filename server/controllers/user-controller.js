@@ -11,20 +11,26 @@ exports.createUser = async (req, res) => {
   const salt = bcrypt.genSaltSync(10);
   const encryptedPassword = bcrypt.hashSync(password, salt);
 
-  UserModel.create({
-    name,
-    password: encryptedPassword,
+  UserModel.findOne({
+    name
   }, (err, user) => {
-    if (err) return res.json(err);
+    if (user) return res.status(409).send("User already exists");
 
-    const token = jwt.sign(
-      { user_id: user._id },
-      process.env.TOKEN_KEY,
-      { expiresIn: '8h' }
-    );
-    user.token = token;
-
-    res.json(user);
+    UserModel.create({
+      name,
+      password: encryptedPassword,
+    }, (err, user) => {
+      if (err) return res.json(err);
+  
+      const token = jwt.sign(
+        { user_id: user._id },
+        process.env.TOKEN_KEY,
+        { expiresIn: '8h' }
+      );
+      user.token = token;
+  
+      res.json(user);
+    });
   });
 }
 
