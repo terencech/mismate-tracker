@@ -1,11 +1,12 @@
 const MismateModel = require('../models/mismate.js');
 
 exports.createMismate = async (req, res) => {
-  const { scan, side, hasBox } = req.body;
+  const { sku, side, hasBox } = req.body;
+  const userId = req.user.user_id;
 
   MismateModel.create({
-    userId: null,
-    sku: scan,
+    userId,
+    sku,
     side,
     hasBox
   }, (err, mismate) => {
@@ -15,8 +16,10 @@ exports.createMismate = async (req, res) => {
 }
 
 exports.readMismates = async (req, res) => {
+  const userId = req.user.user_id;
+
   MismateModel.find({
-    userId: null
+    userId
   }, (err, mismates) => {
     if (err) res.json(err);
     res.json(mismates);
@@ -26,7 +29,7 @@ exports.readMismates = async (req, res) => {
 exports.updateMismate = async (req, res) => {
   const id = req.body.id;
 
-  MismateModel.findByIdAndUpdate(id, (err, mismate) => {
+  MismateModel.findByIdAndUpdate(id, { update: update }, (err, mismate) => {
     if (err) res.json(err);
     res.json(mismate);
   });

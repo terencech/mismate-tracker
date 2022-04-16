@@ -1,7 +1,7 @@
 const { body, check, validationResult } = require('express-validator');
 
 exports.validateMismate = [
-  check('scan')
+  check('sku')
     .trim()
     .escape()
     .notEmpty()

@@ -3,11 +3,10 @@ const { createMismate, readMismates, updateMismate, deleteMismate } = require('.
 const verifyToken = require('../middleware/auth.js');
 
 function mismateRoutes(app) {
-  app.use(verifyToken);
-  app.route('/mismates').post(validateMismate, createMismate);
-  app.route('/mismates').get(readMismates);
-  app.route('/mismates').put(updateMismate);
-  app.route('/mismates').delete(deleteMismate);
+  app.route('/mismates').post(validateMismate, verifyToken, createMismate);
+  app.route('/mismates').get(verifyToken, readMismates);
+  app.route('/mismates').put(verifyToken, updateMismate);
+  app.route('/mismates').delete(verifyToken, deleteMismate);
 }
 
 module.exports = mismateRoutes;
