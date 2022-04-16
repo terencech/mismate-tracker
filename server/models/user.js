@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   name: { type: String, required: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   mismates: { type: Schema.Types.ObjectId, ref: 'Mismate' },
   token: { type: String }
 });

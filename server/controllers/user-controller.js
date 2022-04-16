@@ -39,7 +39,7 @@ exports.userLogin = async (req, res) => {
 
   UserModel.findOne({
     name
-  }, (err, user) => {
+  }).select('+password').exec((err, user) => {
     if (err) console.error(err);
     if (user && bcrypt.compareSync(password, user.password)) {
       const token = jwt.sign(
@@ -49,9 +49,10 @@ exports.userLogin = async (req, res) => {
       );
       user.token = token;
 
-      console.log(user.token);
+      const userObj = user.toObject();
+      delete userObj.password;
 
-      res.json(user);
+      res.json(userObj);
     }
   })
 }
