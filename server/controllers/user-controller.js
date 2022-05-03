@@ -74,3 +74,10 @@ exports.getUsername = (req, res) => {
     username: req.user.username
   })
 }
+
+exports.returnAuth = (req, res) => {
+  res.json({
+    isLoggedIn: true,
+    username: req.user.username
+  });
+}
