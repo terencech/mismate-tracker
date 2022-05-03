@@ -1,8 +1,8 @@
-
-
 import ApiService from "../adapters/ApiService";
 
 export default function LoginForm() {
+
+
   function handleLogin(e) {
     e.preventDefault();
 
@@ -13,7 +13,7 @@ export default function LoginForm() {
     }
 
     ApiService.post('/users/login', user, res => {
-      const token = res.data.token.split(" ")[1];
+      const token = res.data.token;
       localStorage.setItem('token', token);
     })
   }

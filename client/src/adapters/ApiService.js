@@ -6,8 +6,8 @@ const axiosInstance = axios.create({
 });
 
 const ApiService = {
-  get(path, callback) {
-    return axiosInstance.get(path)
+  get(path, config, callback) {
+    return axiosInstance.get(path, config)
       .then(res => callback(res))
       .catch(err => Promise.reject(err));
   },
