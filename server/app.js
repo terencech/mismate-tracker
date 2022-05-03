@@ -5,20 +5,13 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/users.js');
 const mismateRoutes = require('./routes/mismates.js');
 const auth = require('./middleware/auth.js');
-
-app.set('view engine', 'ejs');
+const cors = require('cors');
 
 mongoose.connect(process.env.MONGO_URI).catch(err => console.log(err));
 
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
-
-app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/views/index.html');
-});
-
-app.get('/auth', auth, (req, res) => {
-  res.status(200).send('Auth success');
-});
+app.use(express.json());
 
 mismateRoutes(app);
 userRoutes(app);

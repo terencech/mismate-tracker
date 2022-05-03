@@ -4,23 +4,23 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 exports.createUser = async (req, res) => {
-  const { name, password } = req.body;
+  const { username, password } = req.body;
 
-  console.log({ name, password });
+  console.log({ username, password });
 
   const salt = bcrypt.genSaltSync(10);
   const encryptedPassword = bcrypt.hashSync(password, salt);
 
   UserModel.findOne({
-    name
+    username
   }, (err, user) => {
-    if (user) return res.status(409).send("User already exists");
+    if (user) return res.json({ message: "User already exists" });
 
     UserModel.create({
-      name,
+      username,
       password: encryptedPassword,
     }, (err, user) => {
-      if (err) return res.json(err);
+      if (err) return res.json({ message: err });
   
       const token = jwt.sign(
         { user_id: user._id },
@@ -35,24 +35,42 @@ exports.createUser = async (req, res) => {
 }
 
 exports.userLogin = async (req, res) => {
-  const { name, password } = req.body;
+  const { username, password } = req.body;
 
-  UserModel.findOne({
-    name
-  }).select('+password').exec((err, user) => {
-    if (err) console.error(err);
-    if (user && bcrypt.compareSync(password, user.password)) {
-      const token = jwt.sign(
-        { user_id: user._id },
-        process.env.TOKEN_KEY,
-        { expiresIn: '8h' }
-      );
-      user.token = token;
+  console.log('Login attempt by ' + username);
 
-      const userObj = user.toObject();
-      delete userObj.password;
+  UserModel.findOne({ username })
+    .select('+password')
+    .exec((err, user) => {
+      if (err) return res.json({
+        message: 'Invalid username or password'
+      });
 
-      res.json(userObj);
-    }
+      if (user && bcrypt.compareSync(password, user.password)) {
+        console.log('User found, comparing password to hash');
+        jwt.sign(
+          user.toJSON(),
+          process.env.TOKEN_KEY,
+          { expiresIn: '8h' },
+          (err, token) => {
+            if (err) return res.json({ message: err });
+            return res.json({
+              message: 'Success',
+              token: 'Bearer ' + token
+            });
+          }
+        );
+      } else {
+        return res.json({
+          message: 'Invalid username or password'
+        });
+      }
+    });
+}
+
+exports.getUsername = (req, res) => {
+  res.json({
+    isLoggedIn: true,
+    username: req.user.username
   })
 }
