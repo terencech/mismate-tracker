@@ -6,13 +6,15 @@ export default function MismatesTable() {
   const [mismates, setMismates] = React.useState(null);
 
   React.useEffect(() => {
-    ApiService.get('/mismates').then(res => setMismates(res.data));
-  });
-
-  console.log(mismates);
+    ApiService.get('/mismates', {
+      headers: { 'x-access-token': localStorage.getItem('token') }
+    }, res => {
+      setMismates(res.data);
+    });
+  }, []);
 
   if (!mismates) return(
-    <p>Loading</p>
+    <p>Loading...</p>
   );
 
   return(
@@ -26,9 +28,9 @@ export default function MismatesTable() {
       </thead>
       <tbody>
         {
-          mismates.map(mismate => {
+          mismates.map((mismate, index) => {
               return (
-                <tr>
+                <tr key={index}>
                   <td>{ mismate.sku }</td>
                   <td>{ mismate.side }</td>
                   <td>{ mismate.hasBox }</td>

@@ -16,7 +16,7 @@ exports.createMismate = async (req, res) => {
 }
 
 exports.readMismates = async (req, res) => {
-  const userId = req.user.user_id;
+  const userId = req.user.id;
 
   MismateModel.find({
     userId
