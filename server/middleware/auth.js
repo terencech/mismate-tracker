@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
         message: 'Failed to authenticate'
       })
       req.user = {
-        id: decoded.id,
+        _id: decoded._id,
         username: decoded.username
       };
       next();
