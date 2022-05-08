@@ -11,8 +11,8 @@ const ApiService = {
       .then(res => callback(res))
       .catch(err => Promise.reject(err));
   },
-  post(path, data, callback) {
-    return axiosInstance.post(path, data)
+  post(path, data, config, callback) {
+    return axiosInstance.post(path, data, config)
       .then(res => callback(res))
       .catch(err => Promise.reject(err));
   }

@@ -16,7 +16,7 @@ export default function LoginForm() {
       password: form[1].value
     }
 
-    ApiService.post('/users/login', user, res => {
+    ApiService.post('/users/login', user, {}, res => {
       if (res.data.token) {
         const token = res.data.token
         localStorage.setItem('token', token);

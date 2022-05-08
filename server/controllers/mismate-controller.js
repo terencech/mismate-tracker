@@ -2,7 +2,7 @@ const MismateModel = require('../models/mismate.js');
 
 exports.createMismate = async (req, res) => {
   const { sku, side, hasBox } = req.body;
-  const userId = req.user.user_id;
+  const userId = req.user._id;
 
   MismateModel.create({
     userId,
@@ -42,4 +42,8 @@ exports.deleteMismate = async (req, res) => {
     if (err) res.json(err);
     res.json(mismate);
   })
+}
+
+exports.matchMismates = async (req, res) => {
+
 }

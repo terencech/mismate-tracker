@@ -33,7 +33,7 @@ export default function MismatesTable() {
                 <tr key={index}>
                   <td>{ mismate.sku }</td>
                   <td>{ mismate.side }</td>
-                  <td>{ mismate.hasBox }</td>
+                  <td>{ mismate.hasBox ? '\u2713' : '\u274C' }</td>
                 </tr>
               )
             })

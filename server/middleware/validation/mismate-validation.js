@@ -22,11 +22,9 @@ exports.validateMismate = [
   check('hasBox')
     .trim()
     .escape()
-    .isIn('on', '')
-    .withMessage('Please indicate if item has a box')
+    .isBoolean()
+    .withMessage('Please indicate if the box is present')
     .bail(),
-  body('hasBox')
-    .toBoolean(),
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
