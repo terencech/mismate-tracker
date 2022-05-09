@@ -77,6 +77,7 @@ exports.getUsername = (req, res) => {
 
 exports.returnAuth = (req, res) => {
   res.json({
+    userId: req.user.userId,
     isLoggedIn: true,
     username: req.user.username
   });

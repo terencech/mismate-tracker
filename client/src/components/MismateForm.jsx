@@ -11,7 +11,11 @@ export default function MismateForm() {
       hasBox: e.target[3].checked
     }
 
-    console.log(mismate);
+    ApiService.get('/users/isUserAuth', {
+      headers: { 'x-access-token': localStorage.getItem('token') }
+    }, res => {
+      mismate.userId = res.data.userId;
+    })
 
     ApiService.post('/mismates', mismate, {
       headers: { 'x-access-token': localStorage.getItem('token') }
