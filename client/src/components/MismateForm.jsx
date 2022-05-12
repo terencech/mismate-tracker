@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import ApiService from "../adapters/ApiService";
 
-export default function MismateForm() {
+export default function MismateForm(props) {
+
+  const [ mismates, setMismates ] = useState(props);
 
   function handleSubmit(e) {
+
     e.preventDefault();
 
     const mismate = {
@@ -15,12 +19,13 @@ export default function MismateForm() {
       headers: { 'x-access-token': localStorage.getItem('token') }
     }, res => {
       mismate.userId = res.data.userId;
-    })
+    });
 
     ApiService.post('/mismates', mismate, {
       headers: { 'x-access-token': localStorage.getItem('token') }
     }, res => {
-      console.log(res.data);
+      const updatedMismates = [ ...mismates, res.data ];
+      setMismates(updatedMismates);
     });
   }
 

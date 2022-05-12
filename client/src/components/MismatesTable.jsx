@@ -1,21 +1,18 @@
-import React from 'react';
-import ApiService from '../adapters/ApiService';
+import { useState, useEffect } from 'react';
 
-export default function MismatesTable() {
+export default function MismatesTable(props) {
 
-  const [mismates, setMismates] = React.useState(null);
+  const [ mismates, setMismates ] = useState(props);
 
-  React.useEffect(() => {
-    ApiService.get('/mismates', {
-      headers: { 'x-access-token': localStorage.getItem('token') }
-    }, res => {
-      setMismates(res.data);
-    });
-  }, []);
+  useEffect(() => {;
+    setMismates(props);
+  }, [props]);
 
-  if (!mismates) return(
+  if (!Object.keys(mismates).length) return(
     <p>Loading...</p>
   );
+
+  console.log(Object.keys(mismates));
 
   return(
     <table>
@@ -28,12 +25,12 @@ export default function MismatesTable() {
       </thead>
       <tbody>
         {
-          mismates.map((mismate, index) => {
+            Object.keys(mismates).map(key => {
               return (
-                <tr key={index}>
-                  <td>{ mismate.sku }</td>
-                  <td>{ mismate.side }</td>
-                  <td>{ mismate.hasBox ? '\u2713' : '\u274C' }</td>
+                <tr key={ key }>
+                  <td>{ mismates[key].sku }</td>
+                  <td>{ mismates[key].side }</td>
+                  <td>{ mismates[key].hasBox ? '\u2713' : '\u274C' }</td>
                 </tr>
               )
             })
