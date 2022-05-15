@@ -8,16 +8,41 @@ export default function Mismates() {
   const [ mismates, setMismates ] = useState();
 
   useEffect(() => {
-    ApiService.get('/mismates', {
+    if (!mismates) {
+      ApiService.get('/mismates', {
+        headers: { 'x-access-token': localStorage.getItem('token') }
+      }, res => {
+        setMismates(res.data);
+      });
+    }
+  }, [mismates]);
+
+  function handleSubmit(e) {
+
+    e.preventDefault();
+
+    const mismate = {
+      sku: Number(e.target[0].value),
+      side: e.target[1].checked ? e.target[1].value : e.target[2].value,
+      hasBox: e.target[3].checked
+    }
+
+    ApiService.get('/isUserAuth', {
       headers: { 'x-access-token': localStorage.getItem('token') }
     }, res => {
-      setMismates(res.data);
+      mismate.userId = res.data.userId;
+
+      ApiService.post('/mismates', mismate, {
+        headers: { 'x-access-token': localStorage.getItem('token') }
+      }, res => {
+        setMismates([ ...mismates, mismate ]);
+      });
     });
-  }, []);
+  }
 
   return(
     <div>
-      <MismateForm { ...mismates } />
+      <MismateForm handleSubmit={ handleSubmit } />
       <MismatesTable { ...mismates } />
     </div>
   );

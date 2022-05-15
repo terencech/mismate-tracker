@@ -12,8 +12,6 @@ export default function MismatesTable(props) {
     <p>Loading...</p>
   );
 
-  console.log(Object.keys(mismates));
-
   return(
     <table>
       <thead>
