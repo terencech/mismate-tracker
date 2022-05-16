@@ -35,7 +35,7 @@ export default function Mismates() {
       ApiService.post('/mismates', mismate, {
         headers: { 'x-access-token': localStorage.getItem('token') }
       }, res => {
-        setMismates([ ...mismates, mismate ]);
+        setMismates(null);
       });
     });
   }
