@@ -20,7 +20,7 @@ export default function MismateForm(props) {
       </div>
       <label htmlFor="has-box">Has matching box?</label>
       <input type="checkbox" id="has-box" name="hasBox" />
-      <input type="submit" value="Submit" />
+      <input type="submit" value="Submit" onSubmit={ props.handleSubmit } />
     </form>
   );
 }

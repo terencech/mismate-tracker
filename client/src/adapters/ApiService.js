@@ -15,6 +15,11 @@ const ApiService = {
     return axiosInstance.post(path, data, config)
       .then(res => callback(res))
       .catch(err => Promise.reject(err));
+  },
+  delete(path, config, callback) {
+    return axiosInstance.delete(path, config)
+      .then(res => callback(res))
+      .catch(err => Promise.reject(err));
   }
 }
 

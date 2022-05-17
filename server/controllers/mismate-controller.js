@@ -36,11 +36,11 @@ exports.updateMismate = async (req, res) => {
 }
 
 exports.deleteMismate = async (req, res) => {
-  const id = req.body.id;
+  const ids = req.body
 
-  MismateModel.findByIdAndDelete(id, (err, mismate) => {
+  MismateModel.deleteMany({ _id: { $in: ids } }, (err, result) => {
     if (err) res.json(err);
-    res.json(mismate);
+    res.json(result);
   })
 }
 

@@ -6,6 +6,7 @@ import MismatesTable from "../components/MismatesTable";
 export default function Mismates() {
 
   const [ mismates, setMismates ] = useState();
+  const [ getMismatesDone, setGetMismatesDone ] = useState(false);
 
   useEffect(() => {
     if (!mismates) {
@@ -13,6 +14,7 @@ export default function Mismates() {
         headers: { 'x-access-token': localStorage.getItem('token') }
       }, res => {
         setMismates(res.data);
+        setGetMismatesDone(true);
       });
     }
   }, [mismates]);
@@ -36,14 +38,39 @@ export default function Mismates() {
         headers: { 'x-access-token': localStorage.getItem('token') }
       }, res => {
         setMismates(null);
+        setGetMismatesDone(false);
       });
     });
+  }
+
+  function handleDelete(e) {
+
+    e.preventDefault();
+    const selection = [];
+
+    for (let i = 0; i < e.target.length - 1; i++) {
+      if (e.target[i].checked) selection.push(e.target[i].value);
+    }
+
+    ApiService.delete('/mismates', {
+      headers: { 'x-access-token': localStorage.getItem('token') },
+      data: selection
+    }, res => {
+      setMismates(null);
+      setGetMismatesDone(false);
+    });
+  }
+
+  const props = {
+    mismates,
+    getMismatesDone,
+    handleDelete
   }
 
   return(
     <div>
       <MismateForm handleSubmit={ handleSubmit } />
-      <MismatesTable { ...mismates } />
+      <MismatesTable { ...props } />
     </div>
   );
 }
