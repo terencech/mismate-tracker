@@ -44,27 +44,28 @@ export default function Mismates() {
   }
 
   function handleDelete(e) {
-
     e.preventDefault();
-    const selection = [];
 
-    for (let i = 0; i < e.target.length - 1; i++) {
-      if (e.target[i].checked) selection.push(e.target[i].value);
-    }
+    const id = e.target[0].value;
 
     ApiService.delete('/mismates', {
       headers: { 'x-access-token': localStorage.getItem('token') },
-      data: selection
+      data: { id }
     }, res => {
       setMismates(null);
       setGetMismatesDone(false);
-    });
+    })
+  }
+
+  function saveEdit(e) {
+    console.log('saveEdit called');
   }
 
   const props = {
     mismates,
     getMismatesDone,
-    handleDelete
+    handleDelete,
+    saveEdit
   }
 
   return(
