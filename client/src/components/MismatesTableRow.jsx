@@ -4,7 +4,7 @@ export default function MismatesTableRow(props) {
   const { _id, sku, side, hasBox } = props.mismate;
   const [ isEdit, setEdit ] = useState(false);
 
-  function handleEdit() {
+  function toggleEdit() {
     isEdit ? setEdit(false) : setEdit(true);
   }
 
@@ -21,7 +21,7 @@ export default function MismatesTableRow(props) {
         <td>{ hasBox ? "\u2713" : "\u2717" }</td>
         <td>
           <input form="table-form" type="submit" value="Delete" />
-          <button onClick={ e => handleEdit(e) }>Edit</button>
+          <button onClick={ e => toggleEdit(e) }>Edit</button>
         </td>
       </tr>
     )
@@ -29,7 +29,7 @@ export default function MismatesTableRow(props) {
     return (
       <tr>
         <td>
-          <form id="edit-form" />
+          <form id="edit-form" onSubmit={ e => props.handleEdit(e) }/>
           <input type="hidden" name="id" value={ _id } />
         </td>
         <td><input form="edit-form" type="text" name="sku" defaultValue={ sku } /></td>
@@ -37,10 +37,10 @@ export default function MismatesTableRow(props) {
           <input form="edit-form" type="radio" name="side" value="left" defaultChecked={ side === 'left' } />
           <input form="edit-form" type="radio" name="side" value="right" defaultChecked={ side === 'right' } />
         </td>
-        <td><input form="edit-form" type="checkbox" name="hasBox" defaultChecked={ hasBox } /></td>
+        <td><input form="edit-form" type="checkbox" name="hasBox" defaultChecked={ hasBox }/></td>
         <td>
           <input form="edit-form" type="submit" value="Save" />
-          <button onClick={ e => handleEdit(e) }>Cancel</button>
+          <button onClick={ e => toggleEdit(e) }>Cancel</button>
         </td>
       </tr>
     )

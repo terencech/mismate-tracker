@@ -39,6 +39,7 @@ export default function MismatesTable(props) {
                   mismate={ mismates[key] }
                   key={ key }
                   handleDelete={ props.handleDelete }
+                  handleEdit={ props.handleEdit }
                 />
               )
             }

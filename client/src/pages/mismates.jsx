@@ -57,15 +57,17 @@ export default function Mismates() {
     })
   }
 
-  function saveEdit(e) {
-    console.log('saveEdit called');
+  function handleEdit(e) {
+    e.preventDefault();
+
+    console.log('handleEdit called');
   }
 
   const props = {
     mismates,
     getMismatesDone,
     handleDelete,
-    saveEdit
+    handleEdit
   }
 
   return(
