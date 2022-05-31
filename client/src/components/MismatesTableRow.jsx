@@ -34,10 +34,10 @@ export default function MismatesTableRow(props) {
         </td>
         <td><input form="edit-form" type="text" name="sku" defaultValue={ sku } /></td>
         <td>
-          <input form="edit-form" type="radio" name="side" value="left" />
-          <input form="edit-form" type="radio" name="side" value="right" />
+          <input form="edit-form" type="radio" name="side" value="left" defaultChecked={ side === 'left' } />
+          <input form="edit-form" type="radio" name="side" value="right" defaultChecked={ side === 'right' } />
         </td>
-        <td><input form="edit-form" type="checkbox" name="hasBox" /></td>
+        <td><input form="edit-form" type="checkbox" name="hasBox" defaultChecked={ hasBox } /></td>
         <td>
           <input form="edit-form" type="submit" value="Save" />
           <button onClick={ e => handleEdit(e) }>Cancel</button>
