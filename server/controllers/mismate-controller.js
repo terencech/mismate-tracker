@@ -29,7 +29,13 @@ exports.readMismates = async (req, res) => {
 exports.updateMismate = async (req, res) => {
   const id = req.body.id;
 
-  MismateModel.findByIdAndUpdate(id, { update: update }, (err, mismate) => {
+  const update = {
+    sku: req.body.sku,
+    side: req.body.side,
+    hasBox: req.body.hasBox
+  }
+
+  MismateModel.findByIdAndUpdate(id, update, (err, mismate) => {
     if (err) res.json(err);
     res.json(mismate);
   });

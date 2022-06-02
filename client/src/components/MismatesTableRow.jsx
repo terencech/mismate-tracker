@@ -30,7 +30,7 @@ export default function MismatesTableRow(props) {
       <tr>
         <td>
           <form id="edit-form" onSubmit={ e => props.handleEdit(e) }/>
-          <input type="hidden" name="id" value={ _id } />
+          <input form="edit-form" type="hidden" name="id" value={ _id } />
         </td>
         <td><input form="edit-form" type="text" name="sku" defaultValue={ sku } /></td>
         <td>

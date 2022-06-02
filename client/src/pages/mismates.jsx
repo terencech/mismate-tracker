@@ -60,7 +60,19 @@ export default function Mismates() {
   function handleEdit(e) {
     e.preventDefault();
 
-    console.log('handleEdit called');
+    const data = {
+      id: e.target[0].value,
+      sku: e.target[1].value,
+      side: e.target[2].checked ? e.target[2].value : e.target[3].value,
+      hasBox: e.target[4].checked
+    }
+
+    ApiService.put('/mismates', data, {
+      headers: { 'x-access-token': localStorage.getItem('token') }
+    }, res => {
+      setMismates(null);
+      setGetMismatesDone(false);
+    });
   }
 
   const props = {
