@@ -6,16 +6,16 @@ export default function MismatesTable(props) {
   const [ mismates, setMismates ] = useState(props.mismates);
   const [ getMismatesDone, setGetMismatesDone ] = useState(props.getMismatesDone);
 
-  useEffect(() => {;
+  useEffect(() => {
     setMismates(props.mismates);
     setGetMismatesDone(props.getMismatesDone);
   }, [props.mismates, props.getMismatesDone]);
 
-  if (!mismates && !getMismatesDone) {
+  if (!mismates) {
     return(
       <p>Loading...</p>
     );
-  } else if (!mismates && getMismatesDone) {
+  } else if (getMismatesDone && !mismates.length) {
     return(
       <p>No mismates found.</p>
     ); 
