@@ -13,6 +13,9 @@ exports.createMismate = async (req, res) => {
     matchId
   }, (err, mismate) => {
     if (err) res.json(err);
+    if (req.match) {
+      MismateModel.findByIdAndUpdate(matchId)
+    }
     res.json(mismate);
   });
 }
