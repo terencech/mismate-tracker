@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 export default function MismatesTableRow(props) {
-  const { _id, sku, side, hasBox } = props.mismate;
+  const { _id, sku, side, hasBox, tracking } = props.mismate;
   const [ isEdit, setEdit ] = useState(false);
 
   function toggleEdit() {
@@ -19,6 +19,7 @@ export default function MismatesTableRow(props) {
         <td>{ sku }</td>
         <td>{ side }</td>
         <td>{ hasBox ? "\u2713" : "\u2717" }</td>
+        <td>{ tracking }</td>
         <td>
           <input form={ "delete-" + _id } type="submit" value="Delete" />
           <button onClick={ e => toggleEdit(e) }>Edit</button>
@@ -38,6 +39,10 @@ export default function MismatesTableRow(props) {
           <input form={ "edit-" + _id } type="radio" name="side" value="right" defaultChecked={ side === 'right' } />
         </td>
         <td><input form={ "edit-" + _id } type="checkbox" name="hasBox" defaultChecked={ hasBox }/></td>
+        <td>{
+          hasBox ? tracking : 
+          <input form={ "edit-" + _id } type="text" name="tracking" default={ tracking }/>
+        }</td>
         <td>
           <input form={ "edit-" + _id } type="submit" value="Save" />
           <button onClick={ e => toggleEdit(e) }>Cancel</button>

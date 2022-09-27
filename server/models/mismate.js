@@ -7,7 +7,7 @@ const mismateSchema = new Schema({
   side: { type: String, enum: ['right', 'left'], required: true },
   hasBox: { type: Boolean, required: true },
   matchId: { type: Schema.Types.ObjectId, ref: 'Mismate', default: null },
-  tracking: { type: String }
+  tracking: { type: String, default: null }
 });
 
 module.exports = mongoose.model('Mismate', mismateSchema);
