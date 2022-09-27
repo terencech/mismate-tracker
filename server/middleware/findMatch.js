@@ -2,18 +2,15 @@ const MismateModel = require('../models/mismate.js');
 
 const findMatch = (req, res, next) => {
     const user = req.user;
-    const mismate = {
+
+    const matchParams = {
       sku: req.body.sku,
-      side: req.body.side,
-      hasBox: req.body.hasBox
+      side: req.body.side === 'left' ? 'right' : 'left',
+      hasBox: req.body.hasBox === 'true' ? false : true,
+      matchId: null
     }
   
-    MismateModel.findOne({
-      sku: mismate.sku,
-      side: mismate.side === 'left' ? 'right' : 'left',
-      hasBox: !mismate.hasBox,
-      matchId: null
-    }, (err, match) => {
+    MismateModel.findOne(matchParams, (err, match) => {
       if (err) res.json(err);
       //req.user object not persisting into callback?
       req.user = user;
