@@ -40,7 +40,8 @@ exports.updateMismate = async (req, res) => {
   const update = {
     sku: req.body.sku,
     side: req.body.side,
-    hasBox: req.body.hasBox
+    hasBox: req.body.hasBox,
+    tracking: req.body.tracking
   }
 
   MismateModel.findByIdAndUpdate(id, update, (err, mismate) => {
@@ -50,10 +51,15 @@ exports.updateMismate = async (req, res) => {
 }
 
 exports.deleteMismate = async (req, res) => {
-  const id = req.body.id
+  const id = req.body.id;
 
   MismateModel.findByIdAndDelete(id, (err, mismate) => {
     if (err) res.json(err);
+    if (mismate.matchId) {
+      MismateModel.findByIdAndUpdate(mismate.matchId, { matchId: null }, (err, match) => {
+        if (err) res.json(err);
+      })
+    }
     res.json(mismate);
   });
 }
