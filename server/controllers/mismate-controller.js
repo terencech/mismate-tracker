@@ -41,11 +41,13 @@ exports.updateMismate = async (req, res) => {
     sku: req.body.sku,
     side: req.body.side,
     hasBox: req.body.hasBox,
-    tracking: req.body.tracking
+    tracking: req.body.tracking,
+    matchId: req.match ? req.match._id : null
   }
 
   MismateModel.findByIdAndUpdate(id, update, (err, mismate) => {
     if (err) res.json(err);
+    if (mismate.matchId) updateMatchById(mismate.matchId);
     res.json(mismate);
   });
 }
@@ -55,11 +57,28 @@ exports.deleteMismate = async (req, res) => {
 
   MismateModel.findByIdAndDelete(id, (err, mismate) => {
     if (err) res.json(err);
-    if (mismate.matchId) {
-      MismateModel.findByIdAndUpdate(mismate.matchId, { matchId: null }, (err, match) => {
-        if (err) res.json(err);
-      })
-    }
+    if (mismate.matchId) updateMatchById(mismate.matchId);
     res.json(mismate);
   });
+}
+
+function updateMatchById(matchId, callback) {
+  MismateModel.findById(matchId, (err, match) => {
+    if (err) console.error(err);
+
+    const matchData = {
+      sku: match.sku,
+      side: match.side === 'left' ? 'right' : 'left',
+      hasBox: !match.hasBox,
+      matchId: null
+    }
+
+    MismateModel.findOneAndUpdate(matchData, { matchId: match._id }, (err, updatedMatch) => {
+      if (err) console.error(err);
+      MismateModel.findByIdAndUpdate(matchId, { matchId: updatedMatch._id || null }, (err, updatedMatch) => {
+        if (err) console.error(err);
+        return updatedMatch;
+      })
+    })
+  })
 }

@@ -64,9 +64,10 @@ export default function Mismates() {
       id: e.target[0].value,
       sku: e.target[1].value,
       side: e.target[2].checked ? e.target[2].value : e.target[3].value,
-      hasBox: e.target[4].checked,
-      tracking: e.target[5].value
+      hasBox: e.target[4].checked
     }
+
+    if (!data.hasBox) data.tracking = e.target[5].value;
 
     ApiService.put('/mismates', data, {
       headers: { 'x-access-token': localStorage.getItem('token') }
