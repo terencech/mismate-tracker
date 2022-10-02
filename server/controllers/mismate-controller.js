@@ -62,7 +62,7 @@ exports.deleteMismate = async (req, res) => {
   });
 }
 
-function updateMatchById(matchId, callback) {
+function updateMatchById(matchId) {
   MismateModel.findById(matchId, (err, match) => {
     if (err) console.error(err);
 
@@ -75,7 +75,9 @@ function updateMatchById(matchId, callback) {
 
     MismateModel.findOneAndUpdate(matchData, { matchId: match._id }, (err, updatedMatch) => {
       if (err) console.error(err);
-      MismateModel.findByIdAndUpdate(matchId, { matchId: updatedMatch._id || null }, (err, updatedMatch) => {
+      let updatedMatchId = null;
+      if (updatedMatch) updatedMatchId = updatedMatch._id;
+      MismateModel.findByIdAndUpdate(matchId, { matchId: updatedMatchId }, (err, updatedMatch) => {
         if (err) console.error(err);
         return updatedMatch;
       })
