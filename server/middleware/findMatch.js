@@ -4,7 +4,7 @@ const findMatch = (req, res, next) => {
     const user = req.user;
 
     const matchParams = {
-      sku: req.body.sku,
+      sku: Number(req.body.sku),
       side: req.body.side === 'left' ? 'right' : 'left',
       hasBox: req.body.hasBox === 'true' ? false : true,
       matchId: null

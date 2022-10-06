@@ -26,6 +26,7 @@ export default function MismatesTable(props) {
       <thead>
         <tr>
           <th></th>
+          <th>Send to</th>
           <th>SKU</th>
           <th>Side</th>
           <th>Has box</th>
