@@ -1,0 +1,52 @@
+@import "./variables";
+
+nav {
+    display: flex;
+    background-color: black;
+    height: 5vh;
+    padding: 1em;
+}
+
+nav button {
+    align-self: flex-end;
+}
+
+nav menu {
+    background-color: white;
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 10vh;
+    width: 100vw;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+}
+
+menu a {
+    padding: 1em;
+    text-align: center;
+    color: black;
+    font-family: Calibri, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px solid $border-color;
+}
+
+@media only screen and (min-width: $min-viewport) {
+    nav menu {
+        display: contents;
+    }
+
+    nav button {
+        display: none;
+    }
+
+    menu a {
+        display: inline-block;
+        color: white;
+        font-weight: normal;
+        border-style: none;
+        align-self: center;
+    }
+}

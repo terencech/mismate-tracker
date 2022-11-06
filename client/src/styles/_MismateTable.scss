@@ -1,0 +1,33 @@
+@import './variables';
+
+#loading-message, #no-mismates {
+    text-align: center;
+}
+
+.mismate-div {
+    text-align: center;
+}
+
+@media only screen and (min-width: $min-viewport) {
+    .mismate-div {
+        background-color: $background-color;
+        border: 1px solid $border-color;
+        margin: auto;
+        padding: 10px;
+        width: $min-viewport;
+    }
+    
+    #mismate-table {
+        border-collapse: collapse;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        width: $min-viewport;
+    }
+    
+    th:not(#form-header), .mismate-row td:not(.row-form, .row-buttons) {
+        background-color: $background-color;
+        border: 1px solid $border-color;
+    }
+}

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './pages/login';
 import Mismates from './pages/mismates';
+import './App.css';
 
 function App() {
   return (

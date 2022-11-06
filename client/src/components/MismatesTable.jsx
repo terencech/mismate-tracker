@@ -13,19 +13,19 @@ export default function MismatesTable(props) {
 
   if (!mismates) {
     return(
-      <p>Loading...</p>
+      <p id="loading-message">Loading...</p>
     );
   } else if (getMismatesDone && !mismates.length) {
     return(
-      <p>No mismates found.</p>
-    ); 
+      <p id="no-mismates">No mismates found.</p>
+    );
   }
 
   return(
-    <table>
+    <table id="mismate-table">
       <thead>
         <tr>
-          <th></th>
+          <th id="form-header"></th>
           <th>Send to</th>
           <th>SKU</th>
           <th>Side</th>

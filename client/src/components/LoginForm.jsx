@@ -43,7 +43,7 @@ export default function LoginForm() {
       <input id="username" type="text" required />
       <label htmlFor="password">Password</label>
       <input id="password" type="password" required />
-      <input type="submit" value="Submit"/>
+      <input id="submit" type="submit" value="Submit"/>
     </form>
   );
 }

@@ -1,38 +1,117 @@
-.App {
+#login-form {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  max-width: 20em;
+  padding: 4em;
+}
+#login-form label {
+  margin-left: 4em;
+}
+#login-form input {
+  margin: auto;
+  margin-bottom: 1em;
+  max-width: 20em;
+}
+#login-form #submit {
+  max-width: 6em;
+}
+
+nav {
+  display: flex;
+  background-color: black;
+  height: 5vh;
+  padding: 1em;
+}
+
+nav button {
+  align-self: flex-end;
+}
+
+nav menu {
+  background-color: white;
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 10vh;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+}
+
+menu a {
+  padding: 1em;
+  text-align: center;
+  color: black;
+  font-family: Calibri, sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px solid rgb(77, 77, 77);
+}
+
+@media only screen and (min-width: 768px) {
+  nav menu {
+    display: contents;
+  }
+  nav button {
+    display: none;
+  }
+  menu a {
+    display: inline-block;
+    color: white;
+    font-weight: normal;
+    border-style: none;
+    align-self: center;
+  }
+}
+@media only screen and (min-width: 768px) {
+  #mismate-form {
+    background-color: white;
+    border: 1px solid rgb(77, 77, 77);
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 256px;
+  }
+}
+#loading-message, #no-mismates {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.mismate-div {
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media only screen and (min-width: 768px) {
+  .mismate-div {
+    background-color: white;
+    border: 1px solid rgb(77, 77, 77);
+    margin: auto;
+    padding: 10px;
+    width: 768px;
+  }
+  #mismate-table {
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 768px;
+  }
+  th:not(#form-header), .mismate-row td:not(.row-form, .row-buttons) {
+    background-color: white;
+    border: 1px solid rgb(77, 77, 77);
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(207, 207, 207);
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+#root {
+  margin: 0;
+  padding: 0;
+}/*# sourceMappingURL=App.css.map */

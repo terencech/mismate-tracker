@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import ApiService from '../adapters/ApiService';
 import MismateForm from "../components/MismateForm";
 import MismatesTable from "../components/MismatesTable";
+import NavBar from "../components/NavBar";
 
 export default function Mismates() {
 
@@ -86,6 +87,7 @@ export default function Mismates() {
 
   return(
     <div>
+      <NavBar />
       <MismateForm handleSubmit={ handleSubmit } />
       <MismatesTable { ...props } />
     </div>
