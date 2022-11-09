@@ -24,23 +24,22 @@ nav {
   padding: 1em;
 }
 
-nav button {
-  align-self: flex-end;
+#nav-menu {
+  display: none;
 }
 
-nav menu {
+#menu-toggle:checked ~ #nav-menu {
   background-color: white;
   display: flex;
-  position: fixed;
+  position: absolute;
   left: 0;
-  top: 10vh;
-  width: 100vw;
+  top: 5vh;
+  width: 100%;
   flex-direction: column;
   justify-content: space-between;
   padding: 0;
 }
-
-menu a {
+#menu-toggle:checked ~ #nav-menu a {
   padding: 1em;
   text-align: center;
   color: black;
@@ -51,13 +50,13 @@ menu a {
 }
 
 @media only screen and (min-width: 768px) {
-  nav menu {
+  #nav-menu {
     display: contents;
   }
-  nav button {
+  #menu-toggle {
     display: none;
   }
-  menu a {
+  #nav-menu a {
     display: inline-block;
     color: white;
     font-weight: normal;
