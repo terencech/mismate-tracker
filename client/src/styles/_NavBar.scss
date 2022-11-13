@@ -4,11 +4,46 @@ nav {
     display: flex;
     background-color: black;
     height: 5vh;
+    width: 100%;
     padding: 1em;
+}
+
+#menu-toggle {
+    visibility: hidden;
 }
 
 #nav-menu {
     display: none;
+}
+
+#menu-button-container {
+    display: flex;
+    height: 100%;
+    width: 27px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#menu-button,
+#menu-button::before,
+#menu-button::after {
+  display: block;
+  background-color: #fff;
+  position: absolute;
+  height: 3px;
+  width: 27px;
+}
+
+#menu-button::before {
+    content: '';
+    margin-top: -9px;
+}
+  
+#menu-button::after {
+    content: '';
+    margin-top: 9px;
 }
 
 #menu-toggle:checked ~ #nav-menu {
@@ -31,6 +66,20 @@ nav {
         text-decoration: none;
         border-bottom: 1px solid $border-color;
     }
+}
+
+#menu-toggle:checked + label #menu-button::before {
+    margin-top: 0px;
+    transform: rotate(405deg);
+}
+
+#menu-toggle:checked + label #menu-button {
+    background: rgba(255, 255, 255, 0);
+  }
+  
+#menu-toggle:checked + label #menu-button::after {
+    margin-top: 0px;
+    transform: rotate(-405deg);
 }
 
 @media only screen and (min-width: $min-viewport) {
