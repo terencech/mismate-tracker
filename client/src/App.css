@@ -102,7 +102,7 @@ nav {
   #nav-menu {
     display: contents;
   }
-  #menu-toggle {
+  #menu-button-container {
     display: none;
   }
   #nav-menu a {
