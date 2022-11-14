@@ -20,7 +20,7 @@
 nav {
   display: flex;
   background-color: black;
-  height: 5vh;
+  height: 30px;
   width: 100%;
   padding: 1em;
 }
@@ -68,7 +68,7 @@ nav {
   display: flex;
   position: absolute;
   left: 0;
-  top: 5vh;
+  top: 46px;
   width: 100%;
   flex-direction: column;
   justify-content: space-between;
@@ -86,7 +86,7 @@ nav {
 
 #menu-toggle:checked + label #menu-button::before {
   margin-top: 0px;
-  transform: rotate(405deg);
+  transform: rotate(45deg);
 }
 
 #menu-toggle:checked + label #menu-button {
@@ -95,7 +95,7 @@ nav {
 
 #menu-toggle:checked + label #menu-button::after {
   margin-top: 0px;
-  transform: rotate(-405deg);
+  transform: rotate(-45deg);
 }
 
 @media only screen and (min-width: 768px) {
