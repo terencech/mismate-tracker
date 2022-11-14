@@ -4,7 +4,7 @@ export default function NavBar() {
         <nav>
             <a href="/">Logo</a>
             <input type="checkbox" id="menu-toggle" />
-            <label for="menu-toggle" id="menu-button-container">
+            <label htmlFor="menu-toggle" id="menu-button-container">
                 <div id="menu-button" />
             </label>
             <menu id="nav-menu">
