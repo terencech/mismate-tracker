@@ -22,32 +22,34 @@ export default function MismatesTable(props) {
   }
 
   return(
-    <table id="mismate-table">
-      <thead>
-        <tr>
-          <th id="form-header"></th>
-          <th>Send to</th>
-          <th>SKU</th>
-          <th>Side</th>
-          <th>Has box</th>
-          <th>Tracking</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          Object.keys(mismates).map(key => {
-              return (
-                <MismatesTableRow
-                  mismate={ mismates[key] }
-                  key={ key }
-                  handleDelete={ props.handleDelete }
-                  handleEdit={ props.handleEdit }
-                />
-              )
-            }
-          )
-        }
-      </tbody>
-    </table>
+    <div id="table-container">
+      <table id="mismate-table">
+        <thead>
+          <tr>
+            <th id="form-header"></th>
+            <th>Send to</th>
+            <th>SKU</th>
+            <th>Side</th>
+            <th>Has box</th>
+            <th>Tracking</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            Object.keys(mismates).map(key => {
+                return (
+                  <MismatesTableRow
+                    mismate={ mismates[key] }
+                    key={ key }
+                    handleDelete={ props.handleDelete }
+                    handleEdit={ props.handleEdit }
+                  />
+                )
+              }
+            )
+          }
+        </tbody>
+      </table>
+    </div>
   );
 }
