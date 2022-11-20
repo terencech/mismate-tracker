@@ -3,9 +3,13 @@
 nav {
     display: flex;
     background-color: black;
-    height: 30px;
-    width: 100%;
-    padding: 1em;
+    height: 70px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #menu-toggle {
@@ -51,20 +55,26 @@ nav {
     display: flex;
     position: absolute;
     left: 0;
-    top: 46px;
+    top: 54px;
     width: 100%;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     padding: 0;
 
     a {
-        padding: 1em;
         text-align: center;
+        width: 100%;
+        padding: 1em;
         color: black;
         font-family: Calibri, sans-serif;
         font-weight: bold;
         text-decoration: none;
         border-bottom: 1px solid $border-color;
+    }
+
+    a:hover {
+        background-color: rgb(218, 218, 218);
     }
 }
 
@@ -83,6 +93,10 @@ nav {
 }
 
 @media only screen and (min-width: $min-viewport) {
+    nav {
+        justify-content: flex-start;
+    }
+
     #nav-menu {
         display: contents;
     }
@@ -92,10 +106,19 @@ nav {
     }
 
     #nav-menu a {
-        display: inline-block;
+        display: flex;
+        align-items: center;
+        font-family: Calibri;
+        text-decoration: none;
         color: white;
         font-weight: normal;
         border-style: none;
-        align-self: center;
+        height: 100%;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    #nav-menu a:hover {
+        background-color: grey;
     }
 }
