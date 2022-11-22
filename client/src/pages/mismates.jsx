@@ -24,8 +24,6 @@ export default function Mismates() {
 
     e.preventDefault();
 
-    console.log(e.target);
-
     const mismate = {
       sku: Number(e.target[0].value),
       side: e.target[2].checked ? e.target[2].value : e.target[3].value,
