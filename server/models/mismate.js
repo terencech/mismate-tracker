@@ -9,7 +9,8 @@ const mismateSchema = new Schema({
   hasBox: { type: Boolean, required: true },
   matchId: { type: Schema.Types.ObjectId, ref: 'Mismate', default: null },
   matchUser: { type: String, default: null },
-  tracking: { type: String, default: null }
+  tracking: { type: String, default: null },
+  dateSubmitted: { type: Date, required: true }
 });
 
 module.exports = mongoose.model('Mismate', mismateSchema);

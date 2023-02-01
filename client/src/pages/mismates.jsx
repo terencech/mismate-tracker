@@ -27,7 +27,8 @@ export default function Mismates() {
     const mismate = {
       sku: Number(e.target[0].value),
       side: e.target[2].checked ? e.target[2].value : e.target[3].value,
-      hasBox: e.target[4].checked
+      hasBox: e.target[4].checked,
+      dateSubmitted: Date.today()
     }
 
     ApiService.get('/isUserAuth', {
@@ -68,7 +69,7 @@ export default function Mismates() {
       hasBox: e.target[4].checked
     }
 
-    if (!data.hasBox) data.tracking = e.target[5].value;
+    data.tracking = data.hasBox ? "" : e.target[5];
 
     ApiService.put('/mismates', data, {
       headers: { 'x-access-token': localStorage.getItem('token') }
