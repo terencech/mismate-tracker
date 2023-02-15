@@ -69,8 +69,6 @@ export default function Mismates() {
       hasBox: e.target[4].checked
     }
 
-    data.tracking = data.hasBox ? "" : e.target[5];
-
     ApiService.put('/mismates', data, {
       headers: { 'x-access-token': localStorage.getItem('token') }
     }, res => {

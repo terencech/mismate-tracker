@@ -48,10 +48,6 @@ export default function MismatesTableRow(props) {
           <input form={ "edit-" + _id } type="radio" name="side" value="right" defaultChecked={ side === 'right' } />
         </td>
         <td><input form={ "edit-" + _id } type="checkbox" name="hasBox" defaultChecked={ hasBox }/></td>
-        <td className="edit-tracking">{
-          hasBox && matchId ? tracking : 
-          <input form={ "edit-" + _id } type="text" name="tracking" defaultValue={ tracking }/>
-        }</td>
         <td className="row-buttons">
           <input form={ "edit-" + _id } type="submit" value="Save" />
           <button onClick={ e => toggleEdit(e) }>Cancel</button>
