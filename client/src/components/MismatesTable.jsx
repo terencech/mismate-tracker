@@ -27,11 +27,10 @@ export default function MismatesTable(props) {
         <thead>
           <tr>
             <th id="form-header"></th>
-            <th>Send to</th>
+            <th>Date submitted</th>
             <th>SKU</th>
             <th>Side</th>
             <th>Has box</th>
-            <th>Tracking</th>
           </tr>
         </thead>
         <tbody>
