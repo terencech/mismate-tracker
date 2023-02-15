@@ -6,7 +6,7 @@ exports.createMismate = async (req, res) => {
   const matchUser = req.match ? req.match.matchUser : null;
   const userId = req.user._id;
   const userName = req.user.username;
-  const dateSubmitted = Date.today();
+  const dateSubmitted = new Date();
 
   MismateModel.create({
     userId,
@@ -37,7 +37,7 @@ exports.updateMismate = async (req, res) => {
     sku: req.body.sku,
     side: req.body.side,
     hasBox: req.body.hasBox,
-    lastUpdated: Date.today()
+    lastUpdated: new Date()
   }
 
   MismateModel.findByIdAndUpdate(req.body.id, update, (err, mismate) => {
