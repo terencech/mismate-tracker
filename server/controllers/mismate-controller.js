@@ -10,20 +10,12 @@ exports.createMismate = async (req, res) => {
 
   MismateModel.create({
     userId,
-    userName,
     sku,
     side,
     hasBox,
-    matchId,
-    matchUser,
     dateSubmitted
   }, (err, mismate) => {
     if (err) res.json(err);
-    if (matchId) {
-      MismateModel.findByIdAndUpdate(matchId, { matchId: mismate._id, matchUser: mismate.userName }, (err, match) => {
-        if (err) res.json(err);
-      });
-    }
     res.json(mismate);
   });
 }
@@ -45,34 +37,12 @@ exports.updateMismate = async (req, res) => {
     sku: req.body.sku,
     side: req.body.side,
     hasBox: req.body.hasBox,
-    tracking: req.body.tracking,
-    matchId: req.match ? req.match._id : null,
-    matchUser: req.match ? req.match.userName : null
+    lastUpdated: Date.today()
   }
 
   MismateModel.findByIdAndUpdate(req.body.id, update, (err, mismate) => {
     if (err) res.json(err);
-
-    if (req.match) {
-      MismateModel.findByIdAndUpdate(req.match._id, { matchId: update._id, matchUser: update.userName, tracking: update.tracking }, (err, updatedMismate) => {
-        if (err) res.json(err);
-      })
-    }
-    if (mismate.matchId) {
-      MismateModel.findById(mismate.matchId, (err, match) => {
-        findNewMatchAndUpdate(match, (err, newMatch) => {
-          if (err) res.json(err);
-          const newMatchParams = {
-            matchId: newMatch ? newMatch._id : null,
-            matchUser: newMatch ? newMatch.userName : null
-          }
-          MismateModel.findByIdAndUpdate(match._id, newMatchParams, (err, updatedMatch) => {
-            if (err) res.json(err);
-            res.json(mismate);
-          });
-        })
-      })
-    } else res.json(mismate);
+    res.json(mismate);
   });
 }
 
@@ -81,39 +51,6 @@ exports.deleteMismate = async (req, res) => {
 
   MismateModel.findByIdAndDelete(id, (err, mismate) => {
     if (err) res.json(err);
-    if (mismate.matchId) {
-      MismateModel.findById(mismate.matchId, (err, match) => {
-        if (err) res.json(mismate);
-        findNewMatchAndUpdate(match, (err, newMatch) => {
-          if (err) res.json(err);
-          const update = {
-            matchId: newMatch ? newMatch._id : null,
-            matchUser: newMatch ? newMatch.userName : null
-          }
-          MismateModel.findByIdAndUpdate(match._id, update, (err, updatedMatch) => {
-            if (err) res.json(err);
-            res.json(mismate);
-          });
-        })
-      })
-    } else res.json(mismate);
+    res.json(mismate);
   });
-}
-
-function findNewMatchAndUpdate(mismate, callback) {
-  const matchParams = {
-    sku: mismate.sku,
-    side: mismate.side === 'left' ? 'right' : 'left',
-    hasBox: !mismate.hasBox,
-    matchId: null
-  }
-  
-  const update = {
-    matchId: mismate._id,
-    matchUser: mismate.userName
-  }
-  
-  MismateModel.findOneAndUpdate(matchParams, update, (err, match) => {
-    callback(err, match);
-  })
 }
